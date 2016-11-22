@@ -12,28 +12,26 @@ float b;
 Minim minim;
 AudioPlayer player;
 float myBufferSize;
-int i = 0; 
- 
+int i = 0;
+int cols, rows;
+
 void setup() {
   size(640,480);
-  background(255); 
   hsb = new float[3];
- 
- video = new Capture(this,640,480); 
-  
+  video = new Capture(this,640,480);
   video.start();
-
   minim = new Minim(this);
   player = minim.loadFile("Pursuit of Happiness.mp3");
   player.play();
- 
   myBufferSize = player.bufferSize() - 1;
 }
- 
+
 void draw() {
-if (video.available()) {
+  
+  if (video.available()) {
+    background( 255 );
     video.read();
-    loadPixels();
+    
     video.loadPixels();
     
   println ( abs(player.mix.get(i))
@@ -49,14 +47,23 @@ if (video.available()) {
     i=0;
     myBufferSize = player.bufferSize() - 1;
   }
-    for (int x = 0; x < video.width; x++ ) {  
-      for (int y = 0; y < video.height; y++ ) {
-        int loc = x + y*video.width;
-        
-     
+    
+    
+    
+    
+    
+    for (int x = 0; x < video.width; x+=40) {
+      for (int y = 0; y < video.height; y+=40 ) {
 
-            
-        float r, g, b;
+
+        
+        for (int ro = x; ro < x+40; ro++) {
+          for (int c = y; c < y+40; c++ ) {
+            int loc = ro + c*video.width;
+
+
+
+   
         r = (video.pixels[loc] >> 16) & 0xFF;
         g = (video.pixels[loc] >> 8) & 0xFF;
         b = (video.pixels[loc]) & 0xFF;
@@ -66,8 +73,8 @@ if (video.available()) {
    
         float deg = hsb[0]*360;
         
-      
-        if (deg >= 0 && deg < 15){ //red
+         if (deg >= 0 && deg < 15){ //red
+          // green
           r = map ( abs(player.mix.get(i)), 0, 1, 120, 155); 
           g = 0;
           b = 0;
@@ -204,11 +211,17 @@ if (video.available()) {
           // Make everything black
           // r = g = b = 0;
         }
+
+
+
+          }
+        }
+
         color c = color(r,g,b);
-        pixels[loc] = c;
+        fill( c );
+        rect(x,y,40,40);
       }
     }
-    updatePixels();
-  }
     
   }
+}
