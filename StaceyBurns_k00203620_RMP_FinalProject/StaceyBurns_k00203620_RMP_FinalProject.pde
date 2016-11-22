@@ -49,8 +49,8 @@ if (video.available()) {
     i=0;
     myBufferSize = player.bufferSize() - 1;
   }
-    for (int x = 0; x < video.width; x++ ) {
-      for (int y = 0; y < video.height; y++ ) {   
+    for (int x = 0; x < video.width; x++ ) {  
+      for (int y = 0; y < video.height; y++ ) {
         int loc = x + y*video.width;
         
      
@@ -67,14 +67,14 @@ if (video.available()) {
         float deg = hsb[0]*360;
         
       
-        if (deg >= 0 && deg < 50){ //red
-          r = map ( abs(player.mix.get(i)), 0, 1, 120, 255); 
+        if (deg >= 0 && deg < 15){ //red
+          r = map ( abs(player.mix.get(i)), 0, 1, 120, 155); 
           g = 0;
           b = 0;
         } 
            else if (deg >=  16 && deg <  30){ //red
-          r = 0;
-          g = map ( abs(player.mix.get(i)), 0, 1, 120, 255); 
+          r = map ( abs(player.mix.get(i)), 0, 1, 150, 255);
+          g = 0; 
           b = 0;
           
         }
@@ -126,22 +126,77 @@ if (video.available()) {
           b = map ( abs(player.mix.get(i)), 0, 1, 120, 255);
           
         }
-         else if (deg >=  151 && deg < 210){ //cyan
-          r = map ( abs(player.mix.get(i)), 0, 1, 0, 10); 
-          g = map ( abs(player.mix.get(i)), 0, 0.7, 120, 255);
+         else if (deg >=  151 && deg < 165){ //cyan
+          r = 0;
+          g = map ( abs(player.mix.get(i)), 0, 1, 70, 120);
+          b = map ( abs(player.mix.get(i)), 0, 1, 70, 120);
+          
+        }
+           else if (deg >=  166 && deg < 180){ //cyan
+          r = 0; 
+          g = map ( abs(player.mix.get(i)), 0, 1, 120, 160);
+          b = map ( abs(player.mix.get(i)), 0, 1, 120, 160);
+          
+        }
+           else if (deg >=  181 && deg < 195){ //cyan
+          r = 0;
+          g = map ( abs(player.mix.get(i)), 0, 1, 160, 255);
+          b = map ( abs(player.mix.get(i)), 0, 1, 160, 255);
+          
+        }
+           else if (deg >=  196 && deg < 210){ //cyan
+          r = 0;
+          g = map ( abs(player.mix.get(i)), 0, 1, 80, 120);
           b = map ( abs(player.mix.get(i)), 0, 1, 120, 255); 
           
         }
-          else if (deg >=  211 && deg < 270){ //blue
+
+         else if (deg >=  211 && deg < 225){ //blue
           r = 0;
           g = 0;
-          b = map ( abs(player.mix.get(i)), 0, 1, 120, 255);
+          b = map ( abs(player.mix.get(i)), 0, 1, 120, 150);
           
         }
-            else if (deg >=  271 && deg < 330){ //magenta
-          r = map ( abs(player.mix.get(i)), 0, 1, 120, 255);
+         else if (deg >=  226 && deg < 240){ //blue
+          r = 0;
           g = 0;
-          b = map ( abs(player.mix.get(i)), 0, 1, 120, 200); 
+          b = map ( abs(player.mix.get(i)), 0, 1, 150, 200);
+          
+        }
+         else if (deg >=  241 && deg < 255){ //blue
+          r = 0;
+          g = 0;
+          b = map ( abs(player.mix.get(i)), 0, 1, 200, 225);
+          
+        }
+         else if (deg >=  256 && deg < 270){ //blue
+          r = 0;
+          g = 0;
+          b = map ( abs(player.mix.get(i)), 0, 1, 225, 255);
+          
+        }
+            else if (deg >=  271 && deg < 285){ //magenta
+          r = map ( abs(player.mix.get(i)), 0, 1, 120, 150);
+          g = 0;
+          b = map ( abs(player.mix.get(i)), 0, 1, 120, 150); 
+          
+        }
+            else if (deg >=  296 && deg < 300){ //magenta
+          r = map ( abs(player.mix.get(i)), 0, 1, 150, 190);
+          g = 0;
+          b = map ( abs(player.mix.get(i)), 0, 1, 150, 190); 
+          
+        }
+            else if (deg >=  301 && deg < 315){ //magenta
+          r = map ( abs(player.mix.get(i)), 0, 1, 190, 225);
+          g = 0;
+          b = map ( abs(player.mix.get(i)), 0, 1, 190, 220); 
+          
+        }
+            else if (deg >=  316 && deg < 330){ //magenta
+          r = map ( abs(player.mix.get(i)), 0, 1, 220, 255);
+          g = 0;
+          b = map ( abs(player.mix.get(i)), 0, 1, 220, 255); 
           
         }
         
