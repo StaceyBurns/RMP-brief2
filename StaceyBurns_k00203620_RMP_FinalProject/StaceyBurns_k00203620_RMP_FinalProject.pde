@@ -219,6 +219,7 @@ void draw() {
 
         color c = color(r,g,b);
         fill( c );
+        noStroke();
         rect(x,y,40,40);
       }
     }
