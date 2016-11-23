@@ -12,6 +12,11 @@ float b;
 int filter = 40;
 int filterIndex = 6;
 int[] filters = {1, 2, 4, 5, 8, 10, 20, 40, 80, 160};
+float songNumber = random(9);
+
+
+
+
  
 Minim minim;
 AudioPlayer player;
@@ -22,10 +27,20 @@ int cols, rows;
 void setup() {
   size(640,480);
   hsb = new float[3];
+  
+  
+  
+XML xml = loadXML("songs.xml");
+
+XML[] tracks = xml.getChildren("track");
+String playTrack = tracks[int(songNumber)].getString("text");
+//track = tracks[1];
+  
+  
   video = new Capture(this,640,480);
   video.start();
   minim = new Minim(this);
-  player = minim.loadFile("Pursuit of Happiness.mp3");
+  player = minim.loadFile(playTrack);
   player.play();
   myBufferSize = player.bufferSize() - 1;
   filter = filters[filterIndex];
@@ -231,11 +246,19 @@ void draw() {
     
   }
 }
+
+
 void keyPressed() {
   if( keyCode == 38 ) {
     filterIndex++;
   } else if( keyCode == 40 ) {
     filterIndex--;
   }
+  if( filterIndex < 0 ) {
+    filterIndex = 0;
+  } else if( filterIndex > 9 ) {
+    filterIndex = 9;
+  }
+  
   filter = filters[filterIndex];
 }
