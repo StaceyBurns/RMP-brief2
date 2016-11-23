@@ -8,6 +8,10 @@ float[] hsb;
 float r;
 float g;
 float b;
+
+int filter = 40;
+int filterIndex = 6;
+int[] filters = {1, 2, 4, 5, 8, 10, 20, 40, 80, 160};
  
 Minim minim;
 AudioPlayer player;
@@ -24,6 +28,7 @@ void setup() {
   player = minim.loadFile("Pursuit of Happiness.mp3");
   player.play();
   myBufferSize = player.bufferSize() - 1;
+  filter = filters[filterIndex];
 }
 
 void draw() {
@@ -52,13 +57,13 @@ void draw() {
     
     
     
-    for (int x = 0; x < video.width; x+=40) {
-      for (int y = 0; y < video.height; y+=40 ) {
+    for (int x = 0; x < video.width; x+=filter) {
+      for (int y = 0; y < video.height; y+=filter ) {
 
 
         
-        for (int ro = x; ro < x+40; ro++) {
-          for (int c = y; c < y+40; c++ ) {
+        for (int ro = x; ro < x+filter; ro++) {
+          for (int c = y; c < y+filter; c++ ) {
             int loc = ro + c*video.width;
 
 
@@ -220,9 +225,17 @@ void draw() {
         color c = color(r,g,b);
         fill( c );
         noStroke();
-        rect(x,y,40,40);
+        rect(x,y,filter,filter);
       }
     }
     
   }
+}
+void keyPressed() {
+  if( keyCode == 38 ) {
+    filterIndex++;
+  } else if( keyCode == 40 ) {
+    filterIndex--;
+  }
+  filter = filters[filterIndex];
 }
